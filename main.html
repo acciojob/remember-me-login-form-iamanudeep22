@@ -1,15 +1,63 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<link rel="stylesheet" href="styles.css">
+    <style>
+        #existing{
+	        display:none;
+        }
+        #existing.show{
+	        display:block;
+        }
+    </style>
 </head>
-
 <body>
+	<h1>Login Form</h1>
+	<form id="form">
+		<label for="username">username:</label><br>
+		<input oninput="input()" type="text" placeholder="Username" id="username"><br>
+		<label for="password">password:</label><br>
+		<input oninput="input()" type="password" id="password" placeholder="Password"><br>
+		<input id="checkbox" type="checkbox">
+		<label for="checkbox">Remember me</label><br>
+		<input type="submit" id="submit" value="Submit"> 
+        <button type="submit" id="existing">Login as existing user</button>
+	</form>
 	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <script>
+        const submit = document.getElementById('submit');
+        const check = document.getElementById('checkbox');
+        submit.addEventListener('click',()=>{
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const data = localStorage.getItem(user);
+            if(check.checked){
+                localStorage.setItem("username",user);
+                localStorage.setItem("password",pass);
+                alert(Logged in as ${user});
+            }
+            if(!check.checked){
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
+                alert("data is removed");
+            }
+        })
+        function input(){
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const data = localStorage.getItem("username");
+            const data1 = localStorage.getItem("password");
+            if(data && data1){
+                const exist = document.querySelector("#existing");
+				exist.classList.toggle("show");
+                exist.addEventListener('click',()=>{
+                    alert(Login as existing user);
+                })
+                const form = document.getElementById('form');
+                form.appendChild(existing);
+            }
+        }
+    </script>
 
 </body>
 
