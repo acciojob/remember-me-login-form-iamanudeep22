@@ -34,7 +34,7 @@
             if(check.checked){
                 localStorage.setItem("username",user);
                 localStorage.setItem("password",pass);
-                alert(Logged in as ${user});
+                alert(`Logged in as ${user}`);
             }
             if(!check.checked){
                 localStorage.removeItem("username");
@@ -51,7 +51,7 @@
                 const exist = document.querySelector("#existing");
 				exist.classList.toggle("show");
                 exist.addEventListener('click',()=>{
-                    alert(Login as existing user);
+                    alert(`Login as existing user`);
                 })
                 const form = document.getElementById('form');
                 form.appendChild(existing);
